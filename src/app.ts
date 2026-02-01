@@ -1,22 +1,24 @@
-
 import express from 'express'
 import mongoose from 'mongoose';
+import { Routes } from './interfaces/routes.interface'
+
 interface App_Interface{
     startServer():void;
     connectDatabase():void;
-    initializeRoutes():void;
+    initializeRoutes(routes: Routes[]): void;
 
 }
 export default class App implements App_Interface{
     Port:number|string;
     app:express.Application
 
-    constructor(){
+    constructor(routes: Routes[]) {
         this.Port = 4000
         this.app = express()
-        this.startServer()
         this.connectDatabase()
-        this.initializeRoutes()
+        this.initializeMiddlewares()
+        this.initializeRoutes(routes)
+        this.startServer()
     }
 
     startServer():void{
@@ -33,7 +35,15 @@ export default class App implements App_Interface{
             console.log(err)
         }
     };
-    initializeRoutes():void{
-        this.app.use(express.json())
+
+    initializeMiddlewares(){
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: true }));
+    }
+
+    initializeRoutes(routes: Routes[]): void {
+        routes.forEach(route => {
+            this.app.use('/', route.router);
+        });
     };
 }
