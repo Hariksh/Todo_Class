@@ -1,4 +1,4 @@
-# Post App Backend (formerly Todo)
+# Post App Backend
 
 This application has been converted from a Todo app to a **Post (Article) App**, reusing the existing file structure.
 
