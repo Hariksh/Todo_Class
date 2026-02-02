@@ -6,60 +6,60 @@ export default class ToDoController {
     app = express()
 
 
-    getAllTasks = async (req: Request, res: Response) => {
+    getAllPosts = async (req: Request, res: Response) => {
         try {
-            const task = await this.todoService.getTask();
-            res.json(task);
+            const posts = await this.todoService.getPosts();
+            res.json(posts);
         } catch (error) {
-            res.status(500).json({ message: "Error fetching tasks", error });
+            res.status(500).json({ message: "Error fetching posts", error });
         }
     }
 
-    getTaskById = async (req: Request, res: Response) => {
+    getPostById = async (req: Request, res: Response) => {
         try {
-            const task = await this.todoService.getTaskById(req.params.id as string);
-            if (!task) {
-                res.status(404).json({ message: "Task not found" });
+            const post = await this.todoService.getPostById(req.params.id as string);
+            if (!post) {
+                res.status(404).json({ message: "Post not found" });
                 return;
             }
-            res.json(task);
+            res.json(post);
         } catch (error) {
-            res.status(500).json({ message: "Error fetching task", error });
+            res.status(500).json({ message: "Error fetching post", error });
         }
     }
 
-    createTask = async (req: Request, res: Response) => {
+    createPost = async (req: Request, res: Response) => {
         try {
-            const task = await this.todoService.createTask(req.body);
-            res.status(201).json(task);
+            const post = await this.todoService.createPost(req.body);
+            res.status(201).json(post);
         } catch (error) {
-            res.status(500).json({ message: "Error creating task", error });
+            res.status(500).json({ message: "Error creating post", error });
         }
     }
 
-    updateTask = async (req: Request, res: Response) => {
+    updatePost = async (req: Request, res: Response) => {
         try {
-            const task = await this.todoService.updateTask(req.params.id as string, req.body);
-            if (!task) {
-                res.status(404).json({ message: "Task not found" });
+            const post = await this.todoService.updatePost(req.params.id as string, req.body);
+            if (!post) {
+                res.status(404).json({ message: "Post not found" });
                 return;
             }
-            res.json(task);
+            res.json(post);
         } catch (error) {
-            res.status(500).json({ message: "Error updating task", error });
+            res.status(500).json({ message: "Error updating post", error });
         }
     }
 
-    deleteTask = async (req: Request, res: Response) => {
+    deletePost = async (req: Request, res: Response) => {
         try {
-            const task = await this.todoService.deleteTask(req.params.id as string);
-            if (!task) {
-                res.status(404).json({ message: "Task not found" });
+            const post = await this.todoService.deletePost(req.params.id as string);
+            if (!post) {
+                res.status(404).json({ message: "Post not found" });
                 return;
             }
-            res.json({ message: "Task deleted successfully" });
+            res.json({ message: "Post deleted successfully" });
         } catch (error) {
-            res.status(500).json({ message: "Error deleting task", error });
+            res.status(500).json({ message: "Error deleting post", error });
         }
     }
 }

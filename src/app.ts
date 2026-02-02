@@ -27,8 +27,8 @@ export default class App implements App_Interface{
         })
     };
     async connectDatabase():Promise<void>{
-        try{
-            await mongoose.connect("")
+        try {
+            await mongoose.connect("mongodb+srv://hariksh2007_db_user:Hariksh%4007@cluster0.704vsvr.mongodb.net/todo_app?retryWrites=true&w=majority")
             console.log('database connected')
         }
         catch(err){

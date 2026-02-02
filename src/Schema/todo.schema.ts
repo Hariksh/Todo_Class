@@ -1,15 +1,17 @@
 import { Schema, Document, model } from "mongoose"
 
-export interface ToDoInterface extends Document {
+export interface PostInterface extends Document {
     title: String;
-    description: String;
-    isCompleted: Boolean;
+    content: String;
+    author: String;
+    createdAt: Date;
 }
 
-const ToDoSchema = new Schema<ToDoInterface>({
+const PostSchema = new Schema<PostInterface>({
     title: { type: String, required: true },
-    description: { type: String, required: true },
-    isCompleted: { type: Boolean, default: false }
+    content: { type: String, required: true },
+    author: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
 })
 
-export const TodoModel = model("task", ToDoSchema);
+export const PostModel = model("post", PostSchema);
